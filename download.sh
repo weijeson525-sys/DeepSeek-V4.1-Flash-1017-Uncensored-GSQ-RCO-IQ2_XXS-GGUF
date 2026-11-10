@@ -4,6 +4,12 @@
 # weights are NOT included (GitHub single-file limit is 100 MB).
 # No token, no credentials: the HF repo is public (gated=false).
 set -euo pipefail
+# Reject unexpected extra arguments: a stray extra arg must never start a download.
+if [ "$#" -gt 1 ]; then
+  echo "ERROR: too many arguments (expected at most 1). Usage: ./download.sh [QUANT|--list|--mmproj|--help]" >&2
+  exit 1
+fi
+
 HF_REPO="Abiray/DeepSeek-V4.1-Flash-1017-Uncensored-GSQ-RCO-IQ2_XXS-GGUF"
 BASE="https://huggingface.co/$HF_REPO/resolve/main"
 
